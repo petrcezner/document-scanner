@@ -48,6 +48,7 @@ def on_image_convert_submit():
     st.session_state.loaded_image = cv2.imdecode(file_bytes, 1)
     st.session_state.document_language = st.session_state.doc_language
     st.session_state.image_loaded = True
+    logger.info('Image is uploaded.')
 
 
 if st.button('Upload Image'):
@@ -77,6 +78,8 @@ if st.session_state.image_loaded:
                            data=uploaded_file,
                            file_name=f'converted_image_{st.session_state.current_time.strftime("%Y%m%d-%H%M%S")}.txt',
                            mime='text/txt')
+        logger.info('The output file is downloaded and saved.')
+
 if st.button('Close'):
     st.session_state.image_loaded = False
     st.session_state.converted = False

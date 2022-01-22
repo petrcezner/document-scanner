@@ -1,10 +1,12 @@
-import datetime
 from pathlib import Path
 
+import logging
 import cv2
 import pytesseract
 import re
 from image_straighter import straight
+
+logger = logging.getLogger('__main__.number_detector.py')
 
 
 def detect_text(image, file_name: Path = Path('data/converted.txt'), language='eng'):
@@ -43,7 +45,9 @@ def detect_text(image, file_name: Path = Path('data/converted.txt'), language='e
 
 def convert_image(image, language='eng'):
     image = straight(image)
+    logger.debug('Image is straighted.')
     result_path = detect_text(image, language=language)
+    logger.info('Image is converted.')
     return result_path
 
 
