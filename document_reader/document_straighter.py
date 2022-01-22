@@ -19,7 +19,8 @@ def straight(img):
     if lines is None:
         lines = cv2.HoughLines(binary, 1, np.pi / 180, 150, None, 0, 0)
     # lines = cv2.HoughLines(binary, 1, np.pi / 720, 1000, None, 0, 0)
-
+    if lines is None:
+        return img
     angles = []
     for line in lines:
         rho, theta = line[0]

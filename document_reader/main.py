@@ -6,10 +6,10 @@ from document_straighter import straight
 def detect_text(image):
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
-    blur = cv2.GaussianBlur(gray, (3, 3), 0)
-    ret, thresh1 = cv2.threshold(blur, 0, 255, cv2.THRESH_OTSU | cv2.THRESH_BINARY_INV)
+    # blur = cv2.GaussianBlur(gray, (3, 3), 0)
+    ret, thresh1 = cv2.threshold(gray, 0, 255, cv2.THRESH_OTSU | cv2.THRESH_BINARY_INV)
 
-    rect_kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (10, 10))
+    rect_kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (18, 18))
 
     dilation = cv2.dilate(thresh1, rect_kernel, iterations=1)
 
@@ -29,20 +29,16 @@ def detect_text(image):
 
         cropped = im2[y:y + h, x:x + w]
         text = pytesseract.image_to_string(cropped)
-        if text.isdigit():
-            with open("recognized.txt", "a") as f:
-                f.write(text)
-                f.write("\n")
+        with open("recognized.txt", "a") as f:
+            f.write(text)
+            f.write("\n")
 
-            print(text)
+        print(text)
 
 
 if __name__ == '__main__':
-    img = cv2.imread("data/1_7.png")
+    img = cv2.imread("data/sample_6.png")
     cv2.imshow("Imported img", img)
     cv2.waitKey(0)
     img = straight(img)
-    imS = cv2.resize(img, (960, 540))
-    cv2.imshow("Imported img", imS)
-    cv2.waitKey(0)
     detect_text(img)
