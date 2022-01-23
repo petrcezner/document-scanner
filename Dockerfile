@@ -11,6 +11,8 @@ RUN pip install -r requirements.txt
 
 COPY document_reader/. /app/document_reader
 
+RUN python document_reader/document_db/init_db.py
+
 ENTRYPOINT [ "streamlit", "run" ]
 EXPOSE 8501
 CMD [ "document_reader/streamlit_app.py"]
