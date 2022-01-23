@@ -1,0 +1,7 @@
+colorlog>=6.6.0
+opencv-python-headless
+numpy>=1.19.3
+streamlit>=1.4.0
+pandas>=1.2.4
+pillow>=8.2.0
+pytesseract>=0.3.8

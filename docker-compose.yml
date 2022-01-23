@@ -1,0 +1,8 @@
+version: "3.3"
+services:
+  document-converter:
+    container_name: document-converter
+    build: ""
+    ports:
+      - "8501:8501"
+    image: document-converter:2022.1.0

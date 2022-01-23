@@ -234,3 +234,5 @@ mi10-backend.tar
 *.ckpt
 hparams.yaml
 events.out.tfevents.*
+
+*.db
